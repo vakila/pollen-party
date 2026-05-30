@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2842144404461611257}
   - component: {fileID: 3163316495013056672}
   m_Layer: 0
-  m_Name: Butterfly
+  m_Name: ButterflyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

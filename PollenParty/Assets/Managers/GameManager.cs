@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public NakamaConnection NakamaConnection;
     // public GameObject NetworkLocalPlayerPrefab;
     // public GameObject NetworkRemotePlayerPrefab;
+    public GameObject ButterflyPrefab;
     // public GameObject MainMenu;
     // public GameObject InGameMenu;
     // public Text WinningPlayerText;
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private async void Start()
     {
+        Debug.Log("start");
+
         // Create an empty dictionary to hold references to the currently connected players.
         players = new Dictionary<string, GameObject>();
 
@@ -192,10 +195,10 @@ public class GameManager : MonoBehaviour
 
         // Choose the appropriate player prefab based on if it's the local player or not.
         // var playerPrefab = isLocal ? NetworkLocalPlayerPrefab : NetworkRemotePlayerPrefab;
+        var playerPrefab = ButterflyPrefab;
 
         // Spawn the new player.
-        // TODO
-        // var player = Instantiate(playerPrefab, spawnPoint.transform.position, Quaternion.identity);
+        var player = Instantiate(playerPrefab, new Vector3(-3, -3, 0), Quaternion.identity);
 
         // Setup the appropriate network data values if this is a remote player.
         if (!isLocal)
