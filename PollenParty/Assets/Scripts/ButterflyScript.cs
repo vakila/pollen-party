@@ -37,12 +37,10 @@ public class ButterflyScript : MonoBehaviour
     {
         if (m_flapLeft.WasPressedThisFrame())
         {
-            Debug.Log("Flap Left");
             Flap(-1);
         }
         else if (m_flapRight.WasPressedThisFrame())
         {
-            Debug.Log("Flap Right");
             Flap(1);
         }
 
