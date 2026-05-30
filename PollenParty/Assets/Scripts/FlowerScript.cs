@@ -4,12 +4,10 @@ public class FlowerScript : MonoBehaviour
 {
     [SerializeField] private float collectionTime = 1f;
 
-    private GameState gameState;
     private float collisionTimer = 0f;
 
     private void Start()
     {
-        gameState = new GameState();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -24,7 +22,7 @@ public class FlowerScript : MonoBehaviour
             if (collisionTimer >= collectionTime)
             {
                 // Increment the flowers collected counter
-                gameState.flowersCollected++;
+                GameState.instance.flowersCollected++;
                 Debug.Log("Flower collected!");
 
                 // Destroy the entire flower (parent container with Bloom and Stem)
