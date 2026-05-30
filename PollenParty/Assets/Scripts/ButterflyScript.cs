@@ -9,6 +9,8 @@ public class ButterflyScript : MonoBehaviour
     {
         Vector2 input = Vector2.zero;
 
+
+
         // A key: move up and left (flapping left)
         if (Keyboard.current.aKey.isPressed)
         {
