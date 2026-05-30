@@ -685,6 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7304e7d3eb36a47e7ab925d47bd9667c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  InputActions: {fileID: -944628639613478452, guid: f6a0675b3be2408469f25c69d5d4404d, type: 3}
+  flapForce: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

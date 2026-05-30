@@ -1,30 +1,51 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class ButterflyScript : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    public InputActionAsset InputActions;
+
+    [SerializeField] private float flapForce = 5f;
+
+    private InputAction m_flapLeft;
+    private InputAction m_flapRight;
+
+    private Rigidbody2D rb;
+    private void OnEnable()
+    {
+        InputActions.FindActionMap("Flap").Enable();
+    }
+
+    private void OnDisable()
+    {
+        InputActions.FindActionMap("Flap").Disable();
+    }
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        InputActionMap flapMap = InputActions.FindActionMap("Flap");
+        m_flapLeft = flapMap.FindAction("FlapLeft");
+        m_flapRight = flapMap.FindAction("FlapRight");
+    }
 
     private void Update()
     {
-        Vector2 input = Vector2.zero;
-
-        // A key: move up and left (flapping left)
-        if (Keyboard.current.aKey.isPressed)
+        if (m_flapLeft.WasPressedThisFrame())
         {
-            input.x -= 1;
-            input.y += 1;
+            Flap(-1);
         }
-
-        // D key: move up and right (flapping right)
-        if (Keyboard.current.dKey.isPressed)
+        else if (m_flapRight.WasPressedThisFrame())
         {
-            input.x += 1;
-            input.y += 1;
+            Flap(1);
         }
+    }
 
-        Vector3 movement = new Vector3(input.x, input.y, input.y).normalized;
-
-        transform.position += movement * moveSpeed * Time.deltaTime;
+    private void Flap(int direction)
+    {
+        Vector2 force = new Vector2(direction * flapForce, flapForce);
+        rb.AddForce(force, ForceMode2D.Impulse);
     }
 }
