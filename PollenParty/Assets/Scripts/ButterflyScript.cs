@@ -1,30 +1,65 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class ButterflyScript : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    public InputActionAsset InputActions;
+
+    [SerializeField] private float flapForce = 5f;
+    [SerializeField] private float horizontalVelocityDecay = 0.95f;
+    [SerializeField] private float maxVerticalVelocity = 4f;
+
+    private InputAction m_flapLeft;
+    private InputAction m_flapRight;
+
+    private Rigidbody2D rb;
+    private void OnEnable()
+    {
+        InputActions.FindActionMap("Flap").Enable();
+    }
+
+    private void OnDisable()
+    {
+        InputActions.FindActionMap("Flap").Disable();
+    }
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        InputActionMap flapMap = InputActions.FindActionMap("Flap");
+        m_flapLeft = flapMap.FindAction("FlapLeft");
+        m_flapRight = flapMap.FindAction("FlapRight");
+    }
 
     private void Update()
     {
-        Vector2 input = Vector2.zero;
-
-        // A key: move up and left (flapping left)
-        if (Keyboard.current.aKey.isPressed)
+        if (m_flapLeft.WasPressedThisFrame())
         {
-            input.x -= 1;
-            input.y += 1;
+            Debug.Log("Flap Left");
+            Flap(-1);
+        }
+        else if (m_flapRight.WasPressedThisFrame())
+        {
+            Debug.Log("Flap Right");
+            Flap(1);
         }
 
-        // D key: move up and right (flapping right)
-        if (Keyboard.current.dKey.isPressed)
-        {
-            input.x += 1;
-            input.y += 1;
-        }
+        // Apply horizontal velocity decay
+        Vector2 velocity = rb.linearVelocity;
+        velocity.x *= horizontalVelocityDecay;
+        rb.linearVelocity = velocity;
 
-        Vector3 movement = new Vector3(input.x, input.y, input.y).normalized;
+        // Clamp vertical velocity
+        velocity = rb.linearVelocity;
+        velocity.y = Mathf.Clamp(velocity.y, -maxVerticalVelocity, maxVerticalVelocity);
+        rb.linearVelocity = velocity;
+    }
 
-        transform.position += movement * moveSpeed * Time.deltaTime;
+    private void Flap(int direction)
+    {
+        Vector2 force = new Vector2(direction * flapForce, flapForce/2);
+        rb.AddForce(force, ForceMode2D.Impulse);
     }
 }

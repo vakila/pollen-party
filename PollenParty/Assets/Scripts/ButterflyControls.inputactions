@@ -1,0 +1,77 @@
+{
+    "version": 1,
+    "name": "ButterflyControls",
+    "maps": [
+        {
+            "name": "Flap",
+            "id": "9444d22e-c427-475e-8a12-f5f96c408673",
+            "actions": [
+                {
+                    "name": "FlapLeft",
+                    "type": "Button",
+                    "id": "4ec3f2ea-9bc7-4b72-8d30-8cc4ce12bb8d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FlapRight",
+                    "type": "Button",
+                    "id": "95dd103b-e2af-42c9-ae3a-9ac68709c6cf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6bdd241a-ebee-4527-bb78-6cc69037e12f",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlapLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "474a6822-dee7-444d-8f58-a64ae3c4a4e4",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlapLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "454ee2fe-5fe0-4c9c-8813-f1b499fc0167",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlapRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fad8bfc5-17be-41d6-82c6-ce6f352adc3a",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlapRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
