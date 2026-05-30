@@ -9,19 +9,21 @@ public class ButterflyScript : MonoBehaviour
     {
         Vector2 input = Vector2.zero;
 
-        if (Keyboard.current.wKey.isPressed)
-            input.y += 1;
-
-        if (Keyboard.current.sKey.isPressed)
-            input.y -= 1;
-
-        if (Keyboard.current.dKey.isPressed)
-            input.x += 1;
-
+        // A key: move up and left (flapping left)
         if (Keyboard.current.aKey.isPressed)
+        {
             input.x -= 1;
+            input.y += 1;
+        }
 
-        Vector3 movement = new Vector3(input.x, 0f, input.y).normalized;
+        // D key: move up and right (flapping right)
+        if (Keyboard.current.dKey.isPressed)
+        {
+            input.x += 1;
+            input.y += 1;
+        }
+
+        Vector3 movement = new Vector3(input.x, input.y, input.y).normalized;
 
         transform.position += movement * moveSpeed * Time.deltaTime;
     }
