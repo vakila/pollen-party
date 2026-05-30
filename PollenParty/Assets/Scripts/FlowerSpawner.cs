@@ -10,6 +10,11 @@ public class FlowerSpawner : MonoBehaviour
 
     private float spawnTimer = 0f;
 
+    public float GetTimeUntilNextSpawn()
+    {
+        return Mathf.Max(0f, spawnInterval - spawnTimer);
+    }
+
     private void Update()
     {
         spawnTimer += Time.deltaTime;
